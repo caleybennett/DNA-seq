@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
+import CreateDNA from './DNA/createDNA'
 
 const Dashboard = () => (
   <div>
@@ -16,6 +17,7 @@ const App = () => (
     <h1>Welcome to React!</h1>
     <div>
       <Route path="/dashboard" component={Dashboard}/>
+      <Route path="/enter-sequence" component={CreateDNA} />
     </div>
   </div>
 )
