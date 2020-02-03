@@ -19,7 +19,7 @@ class CreateDNA extends Component {
       },
       created: false,
       duplicate: false,
-      validInput: true
+      validInput: false
     }
   }
 
@@ -39,40 +39,19 @@ class CreateDNA extends Component {
   }
 
   onlyCorrectLetters = (sequence) => {
-    // first make everything uppercase and split the string by the characters
     const uppercaseSequence = sequence.toUpperCase()
-    console.log('uppercase sequence is ' + uppercaseSequence)
-    console.log(uppercaseSequence.split(''))
+    // make the string an array splitting by character
     const arr = uppercaseSequence.split('')
-    console.log(arr)
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] !== ('A' || 'T' || 'G' || 'C')) {
-        console.log('not valid')
-      } else {
-        reactLocalStorage.setObject('entries', { 'entries': this.state.entries })
-      }
+
+    const newArr = arr.filter(nucleotide => (nucleotide === 'A' || nucleotide === 'T' || nucleotide === 'C' || nucleotide === 'G'))
+    console.log(newArr.length)
+    console.log(arr.length)
+    if (newArr.length !== arr.length) {
+      return console.log('this does not match')
+    } else {
+      reactLocalStorage.setObject('entries', { 'entries': this.state.entries })
     }
   }
-  // This method doesn't work -- it only returns the two A's.
-  // Maybe use a function that maps the maps over the array and if one of the letters
-  // matches the right letter it pushes it to a new array
-  // then take the length of both the arrays and see if they are the same.
-  //     const newArr = arr.filter(nucleotide => nucleotide === ('A' || 'T' || 'C' || 'G'))
-  //     if (newArr.length === arr.length) {
-  //       return 'valid'
-  //     } else {
-  //       return 'not valid'
-  // }
-  // addFromLS = (obj) => {
-  //
-  // }
-  //
-  // // componentDidMount () {
-  // //   // check local storage for an object
-  // //
-  // //   // if it exsists, add it
-  // //   // call addFromLS
-  //  }
 
   handleChange = event => {
     const inputName = event.target.name
@@ -88,38 +67,44 @@ class CreateDNA extends Component {
   handleSubmit = event => {
     event.preventDefault()
     // make sure that the dna sequence has only the appropriate letters
-    const uppercaseSequence = this.state.entries[this.state.entries.length - 1].sequence.toUpperCase()
-    console.log('uppercase sequence is ' + uppercaseSequence)
-    console.log(uppercaseSequence.split(''))
-    const arr = uppercaseSequence.split('')
-    console.log(arr)
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] === ('A' || 'T' || 'G' || 'C')) {
-        return reactLocalStorage.setObject('entries', { 'entries': this.state.entries })
-      } else {
-        return console.log('not valid')
-      }
-    }
-    // this.onlyCorrectLetters(this.state.entries[this.state.entries.length - 1].sequence)
-    // make sure that the dna sequence isn't a duplicate
-    // if validInput is true, setObject, if it is false, display an error message
-
-    // this.state.validInput ?  : console.log('not valid input')
-    // once the item is created, change the state of created to true
-    // Do something here with local storage to store the data
-    // Only store the data if it has correct letters
-    //   // newArr.length === arr.length ? this.setState({ validInput: true }) : this.setState({ validInput: false })
-    // }
-    // create a state that is
-    // Only store data if it has never been entered before
-    // In order to do this, do a getter method to get all the data and filter through
-    // through it
-
-    // This can be done by using a filter method, comparing the data we are submitting
-    // to the data we already have uploaded.
-    // if this.state.dna.sequence ==== sequence form the getter method, return true
+    // make all characters uppercase
+    this.onlyCorrectLetters(this.state.entries[this.state.entries.length - 1].sequence)
+    // make the string an array splitting by character
+    // const arr = uppercaseSequence.split('')
     //
+    // const newArr = arr.filter(nucleotide => (nucleotide === 'A' || nucleotide === 'T' || nucleotide === 'C' || nucleotide === 'G'))
+    // console.log(newArr.length)
+    // console.log(arr.length)
+    // if (newArr.length === arr.length) {
+    //   this.setState({ validInput: true })
+    // } else {
+    //   this.setState({ validInput: false })
+    // }
+
+    // this.setState.validInput ? reactLocalStorage.setObject('entries', { 'entries': this.state.entries })
+    //   : console.log('not valid')
+    // let i
+    // // loop through array and see if the letters match the correct letters
+    // for (i = 0; i < arr.length; i++) {
+    //   console.log(arr[i])
+    //   if (arr[i] === 'A' || arr[i] === 'T' || arr[i] === 'C' || arr[i] === 'G') {
+    //     this.setState({ validInput: true })
+    //   } else {
+    //     this.setState({ validInput: false })
+    //     return console.log('not valid again')
+    //   }
+    // }
+    // this.setState.validInput ? reactLocalStorage.setObject('entries', { 'entries': this.state.entries })
+    //   : console.log('not valid')
   }
+  // this.onlyCorrectLetters(this.state.entries[this.state.entries.length - 1].sequence)
+  // make sure that the dna sequence isn't a duplicate
+  // if validInput is true, setObject, if it is false, display an error message
+
+  // This can be done by using a filter method, comparing the data we are submitting
+  // to the data we already have uploaded.
+  // if this.state.dna.sequence ==== sequence form the getter method, return true
+  //
 
   // notValid = event => {
   //   // add in modal here
