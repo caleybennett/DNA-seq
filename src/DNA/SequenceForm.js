@@ -23,7 +23,7 @@ const SequenceForm = ({ dna, handleChange, handleSubmit, addToEntries }) => (
       onChange={handleChange}
       name="sequence"
     />
-    <button className="btn btn-primary" onClick={addToEntries}> Submit </button>
+    <button type="submit" className="btn btn-primary" onClick={addToEntries}> Submit </button>
   </form>
 )
 

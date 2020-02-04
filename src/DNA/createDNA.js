@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { reactLocalStorage } from 'reactjs-localstorage'
+// import { reactLocalStorage } from 'reactjs-localstorage'
 import SequenceForm from './SequenceForm'
-
+/* global localStorage */
 // to do: figure out how to make an array of objects that is flat
 
 // create a CreateDNA component
@@ -21,15 +21,6 @@ class CreateDNA extends Component {
       duplicate: true,
       validCharacters: false
     }
-  }
-
-  // when the page loads run this function
-  componentDidMount () {
-    // console.log(this.state.entries)
-    // // add the remote entries to this.state.entries
-    // const remoteEntries = reactLocalStorage.getObject('entries')
-    // this.setState({ entries: remoteEntries })
-    // console.log('remoteEntries is', this.state.entries)
   }
 
   // duplicate = (entries) => {
@@ -66,12 +57,12 @@ class CreateDNA extends Component {
     console.log(entries.length)
     entries.push(this.state.dna)
     // use the setState method to update entries and reset dna
-    this.setState({ entries,
-      dna: {
-        sequence: '',
-        name: '',
-        description: ''
-      }
+    this.setState({ entries
+      // dna: {
+      //   sequence: '',
+      //   name: '',
+      //   description: ''
+      // }
     })
   }
   //
@@ -122,26 +113,34 @@ class CreateDNA extends Component {
   // change the name of this to validates?
   onlyCorrectLetters = (sequence) => {
     const uppercaseSequence = sequence.toUpperCase()
+    console.log(uppercaseSequence)
     // make the string an array splitting by character
     const arr = uppercaseSequence.split('')
+    console.log(arr)
 
     const newArr = arr.filter(nucleotide => (nucleotide === 'A' || nucleotide === 'T' || nucleotide === 'C' || nucleotide === 'G'))
 
     console.log(newArr.length)
     console.log(arr.length)
     if (newArr.length !== arr.length) {
+      this.setState({
+        dna: {
+          sequence: '',
+          name: '',
+          description: ''
+        },
+        entries: []
+      })
       return console.log('this does not match')
     } else {
-      // this.state.entries.push(this.state.dna)
-      // // use the setState method to update entries and reset dna
-      // this.setState({ this.state.entries,
-      //   dna: {
-      //     sequence: '',
-      //     name: '',
-      //     description: ''
-      //   }
-      // })
-      this.setState({ validCharacters: true })
+      localStorage.setItem('entries', JSON.stringify(this.state.entries))
+      this.setState({ created: true,
+        dna: {
+          sequence: '',
+          name: '',
+          description: ''
+        }
+      })
     }
   }
 
@@ -154,6 +153,19 @@ class CreateDNA extends Component {
       [inputName]: inputValue
     }
     })
+  }
+
+  duplicate = (sequence, arr) => {
+    console.log('in duplicate function')
+    const duplicateArr = arr.filter(arr => arr.sequence === sequence)
+    console.log(duplicateArr)
+    if (duplicateArr.length > 0) {
+      console.log(arr.sequence)
+      console.log(sequence)
+      console.log('duplicate!!!')
+    } else {
+      this.onlyCorrectLetters(sequence)
+    }
   }
 
   handleSubmit = event => {
@@ -178,23 +190,53 @@ class CreateDNA extends Component {
     // console.log('duplicate.length', duplicate.length)
     // console.log(duplicate)
     // check for duplicate
-    const entries = reactLocalStorage.getObject('entries')
-    let arr = []
+    const entries = JSON.parse(localStorage.getItem('entries'))
+    // let arr = []
     console.log('entries are', entries)
     if (entries) {
-      arr = entries.entries
-      arr.push(this.state.entries)
-      const arr2 = Array.from(new Set(arr))
-      if (arr2.length === arr.length) {
-        this.setState({ duplicate: false })
-      }
-    }
-    this.onlyCorrectLetters(this.state.dna.sequence)
-    if (this.state.validCharacters && !this.state.duplicate) {
-      reactLocalStorage.setObject('entries', { 'entries': this.state.entries })
-      this.setState({ created: true })
+      // arr = entries
+      // this.state.entries.map(entry => arr.push(entry))
+      this.duplicate(this.state.dna.sequence, entries)
+      // // arr.push(this.state.entries)
+      // console.log('arr is ', arr)
+      // const arr2 = Array.from(new Set(arr))
+      // console.log('arr2 is', arr2)
+      // console.log('this.state.dna.sequence is', this.state.dna.sequence)
+      // if (arr2.length === arr.length) {
+      //   // this.setState({ duplicate: false })
+      //   this.onlyCorrectLetters(this.state.dna.sequence)
+      //   console.log(this.state)
+      //   // if (this.state.validCharacters && !this.state.duplicate) {
+      //   //   localStorage.setItem('entries', JSON.stringify(this.state.entries))
+      //   //   this.setState({ created: true,
+      //   //     dna: {
+      //   //       sequence: '',
+      //   //       name: '',
+      //   //       description: ''
+      //   //     }
+      //   //   })
+      //   // } else {
+      //   //   console.log('this does not have correct characters')
+      //   // }
+      // } else {
+      //   console.log('this is a duplicate')
+      // }
     } else {
-      console.log('this does not have correct characters')
+      console.log('got to else')
+      console.log(this.state.dna.sequence)
+      this.onlyCorrectLetters(this.state.dna.sequence)
+      if (this.state.validCharacters) {
+        localStorage.setItem('entries', JSON.stringify(this.state.entries))
+        this.setState({ created: true,
+          dna: {
+            sequence: '',
+            name: '',
+            description: ''
+          }
+        })
+      } else {
+        console.log('this does not have correct characters')
+      }
     }
 
     // once item is saved in local storage, reset this.state.entries to remote entries
