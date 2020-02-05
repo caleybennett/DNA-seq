@@ -57,13 +57,7 @@ class CreateDNA extends Component {
     console.log(entries.length)
     entries.push(this.state.dna)
     // use the setState method to update entries and reset dna
-    this.setState({ entries
-      // dna: {
-      //   sequence: '',
-      //   name: '',
-      //   description: ''
-      // }
-    })
+    this.setState({ entries })
   }
   //
   // const duplicate = entries.filter(entry => entry.sequence === this.state.dna.sequence)
@@ -112,17 +106,20 @@ class CreateDNA extends Component {
 
   // change the name of this to validates?
   onlyCorrectLetters = (sequence) => {
+    // make the sequence uppercase
     const uppercaseSequence = sequence.toUpperCase()
     console.log(uppercaseSequence)
     // make the string an array splitting by character
     const arr = uppercaseSequence.split('')
     console.log(arr)
-
+    // make a new array with only the correct nucleotides
     const newArr = arr.filter(nucleotide => (nucleotide === 'A' || nucleotide === 'T' || nucleotide === 'C' || nucleotide === 'G'))
 
     console.log(newArr.length)
     console.log(arr.length)
+    // if the array lengths don't match it means an invalid character was entered
     if (newArr.length !== arr.length) {
+      // reset this.state
       this.setState({
         dna: {
           sequence: '',
@@ -130,6 +127,11 @@ class CreateDNA extends Component {
           description: ''
         },
         entries: []
+      })
+      this.props.alert({
+        heading: 'Yikes, you entered an invalid sequence',
+        message: 'Correct characters are: A, T, C, and G',
+        variant: 'danger'
       })
       return console.log('this does not match')
     } else {
@@ -140,6 +142,11 @@ class CreateDNA extends Component {
           name: '',
           description: ''
         }
+      })
+      this.props.alert({
+        heading: 'Yay!',
+        message: 'You entered a sequence!',
+        variant: 'success'
       })
     }
   }
@@ -162,7 +169,11 @@ class CreateDNA extends Component {
     if (duplicateArr.length > 0) {
       console.log(arr.sequence)
       console.log(sequence)
-      console.log('duplicate!!!')
+      this.props.alert({
+        heading: 'Yikes',
+        message: 'You entered a sequence that already exsists',
+        variant: 'danger'
+      })
     } else {
       this.onlyCorrectLetters(sequence)
     }

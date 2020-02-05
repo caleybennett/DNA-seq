@@ -1,5 +1,53 @@
+
 body {
   font-family: sans-serif;
-  margin: 0;
-  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+  // text-align: center;
+}
+
+h3 {
+//  padding: 50px;
+  padding-bottom: 50px;
+  // text-align: center;
+}
+
+.search-bar {
+  float: right;
+  margin: 20px;
+}
+
+.sort-btn {
+  float: left;
+  margin: 30px;
+}
+
+.create-form {
+  width: 55%;
+  padding: 10px;
+  justify-content: center;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid black;
+  align-content: center;
+}
+
+.submit-button {
+  justify-content: center;
+  margin: 10px;
+}
+
+.content {
+  float: center;
+  padding: 15px;
+  text-align: center;
+}
+
+.search {
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.submit-button {
+  display: block;
 }
