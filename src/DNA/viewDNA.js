@@ -74,22 +74,18 @@ class ViewDNA extends Component {
       ))
     } else if (!this.state.sorted) {
       entriesJsx = this.state.filteredEntries.map(entry => (
-        <ListGroup.Item className="list-group-item" key={entry.sequence} onClick={this.handleShow}>
+        <div key={this.sequence}>
           <h5> {entry.name }</h5>
           <p> Description: {entry.description} </p>
           <p> Sequence:</p>
           <ModalView name={entry.name} description={entry.description} sequence={entry.sequence}/>
-        </ListGroup.Item>
+        </div
       ))
     } else if (this.state.sorted) {
       entriesJsx = this.state.filteredEntries.sort((a, b) => {
-        if (a.name.toLowerCase() < b.name.toLowerCase()) {
-          return -1
-        } else if (a.name.toLowerCase() > b.name.toLowerCase()) {
-          return 1
-        } else {
-          return 0
-        }
+        if (a.name.toLowerCase() < b.name.toLowerCase()) return -1
+        if (a.name.toLowerCase() > b.name.toLowerCase()) return 1
+        return 0
       })
         .map(entry =>
           <ListGroup.Item className="list-group-item" key={entry.sequence} onClick={this.handleShow}>
