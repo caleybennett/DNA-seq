@@ -11,6 +11,7 @@
     "dotenv": "4.0.0",
     "dotenv-expand": "4.2.0",
     "fs-extra": "3.0.1",
+    "jquery": "^3.4.1",
     "local-storage": "^2.0.0",
     "mdbreact": "^4.25.1",
     "object-assign": "4.1.1",
@@ -23,6 +24,7 @@
     "react-router-dom": "^4.3.1",
     "reactjs-localstorage": "0.0.8",
     "resolve": "1.6.0",
+    "styled-components": "^5.0.1",
     "url-loader": "0.6.2"
   },
   "scripts": {

@@ -4,9 +4,9 @@ import React, { Component } from 'react'
 import ListGroup from 'react-bootstrap/ListGroup'
 // import { MDBCol, MDBFormInline, MDBIcon } from 'mdbreact'
 import { FaSearch } from 'react-icons/fa'
-// import ModalView from './Modal'
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
+// import Modal from 'react-bootstrap/Modal'
+// import Button from 'react-bootstrap/Button'
+import ModalView from './Modal'
 
 class ViewDNA extends Component {
   constructor (props) {
@@ -19,8 +19,8 @@ class ViewDNA extends Component {
       searchValue: '',
       isLoaded: false,
       sorted: false,
-      setShow: false,
-      show: false
+      show: false,
+      example: true
     }
   }
 
@@ -48,7 +48,10 @@ class ViewDNA extends Component {
   }
 
   handleClose = () => {
-    this.setState({ show: false })
+    console.log('in handle close')
+    console.log(this.state)
+    this.setState({ example: true })
+    this.setState({ show: false }, console.log('should have set the state to this', this.state))
   }
 
   handleShow = () => {
@@ -65,22 +68,8 @@ class ViewDNA extends Component {
         <ListGroup.Item className="list-group-item" key={entry.sequence} onClick={this.handleShow}>
           <h5>{entry.name }</h5>
           <p> Description: {entry.description} </p>
-          <p> Sequence: {entry.sequence} </p>
-          <Modal show={this.state.show} onHide={this.handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>{entry.name}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              {entry.description}
-              <br />
-              {entry.sequence}
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose}>
-              Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
+          <p> Sequence:</p>
+          <ModalView name={entry.name} description={entry.description} sequence={entry.sequence}/>
         </ListGroup.Item>
       ))
     } else if (!this.state.sorted) {
@@ -88,22 +77,8 @@ class ViewDNA extends Component {
         <ListGroup.Item className="list-group-item" key={entry.sequence} onClick={this.handleShow}>
           <h5> {entry.name }</h5>
           <p> Description: {entry.description} </p>
-          <p> Sequence: {entry.sequence} </p>
-          <Modal show={this.state.show} onHide={this.handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>{entry.name}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              {entry.description}
-              <br />
-              {entry.sequence}
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose}>
-              Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
+          <p> Sequence:</p>
+          <ModalView name={entry.name} description={entry.description} sequence={entry.sequence}/>
         </ListGroup.Item>
       ))
     } else if (this.state.sorted) {
@@ -120,22 +95,8 @@ class ViewDNA extends Component {
           <ListGroup.Item className="list-group-item" key={entry.sequence} onClick={this.handleShow}>
             <h5> {entry.name} </h5>
             <p> Description: {entry.description} </p>
-            <p> Sequence: {entry.sequence} </p>
-            <Modal show={this.state.show} onHide={this.handleClose}>
-              <Modal.Header closeButton>
-                <Modal.Title>{entry.name}</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                {entry.description}
-                <br />
-                {entry.sequence}
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={this.handleClose}>
-                Close
-                </Button>
-              </Modal.Footer>
-            </Modal>
+            <p> Sequence:</p>
+            <ModalView name={entry.name} description={entry.description} sequence={entry.sequence}/>
           </ListGroup.Item>
         )
     }
@@ -147,7 +108,7 @@ class ViewDNA extends Component {
             <input className="search" value={this.state.searchValue} onChange={this.handleSearch} type="text" placeholder="Search for Sequence"/>
             {console.log(this.state.searchValue)}
           </form>
-          <button className="btn btn-info sort-btn" onClick={this.sortClick}> sort by name </button>
+          <button className="btn btn-primary sort-btn" onClick={this.sortClick}> sort by name </button>
         </div>
         <br />
         <div className="content">
