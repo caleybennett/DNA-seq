@@ -73,6 +73,8 @@ class ViewDNA extends Component {
     if (!this.state.isLoaded) {
       entriesJsx = <p> loading DNA... </p>
       // if there are no filtered entries (i.e. the user hasn't started typing in the search box), then just show entries
+    } else if (!this.state.entries) {
+      entriesJsx = <p> please enter a sequence </p>
     } else if (this.state.filteredEntries.length < 1) {
       entriesJsx = this.state.entries.map(entry => (
         // itereate through all entries and display the name and description
