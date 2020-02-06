@@ -1,6 +1,6 @@
 {
   "name": "DNA-seq",
-  "homepage": "https://github.io/caleybennett/DNA-seq",
+  "homepage": "http://caleybennett.github.io/react-gh-pages,
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -33,7 +33,8 @@
     "test": "node scripts/test.js --env=jsdom",
     "make-standard": "eslint --fix .",
     "nag": "eslint .",
-    "deploy": "sh scripts/deploy.sh"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -100,6 +101,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
+    "gh-pages": "^2.2.0",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
     "node-sass": "^4.9.3",

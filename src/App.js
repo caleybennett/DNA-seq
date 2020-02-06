@@ -46,7 +46,7 @@ class App extends Component {
                 alert={this.alert}
               />
             )} />
-            <Route exact path="/" render={() => (
+            <Route exact path="/view" render={() => (
               <ViewDNA
                 alert={this.alert}
               />
