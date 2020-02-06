@@ -66,6 +66,19 @@ class ViewDNA extends Component {
     this.setState({ filteredEntries: filteredEntries }, console.log(this.state.filteredEntries))
   }
 
+  // method to export JSON
+  exportToJsonFile = () => {
+    const dataStr = JSON.stringify(this.state.entries)
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr)
+
+    const exportFileDefaultName = 'data.json'
+
+    const linkElement = document.createElement('a')
+    linkElement.setAttribute('href', dataUri)
+    linkElement.setAttribute('download', exportFileDefaultName)
+    linkElement.click()
+  }
+
   render () {
     // entries jsx is what will be rendered on the page
     let entriesJsx = ''
@@ -136,6 +149,7 @@ class ViewDNA extends Component {
           <ListGroup>
             {entriesJsx}
           </ListGroup>
+          <button className="btn btn-secondary export" onClick={this.exportToJsonFile}> Download JSON </button>
         </div>
       </div>
     )
