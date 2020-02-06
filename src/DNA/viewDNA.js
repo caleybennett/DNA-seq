@@ -93,7 +93,7 @@ class ViewDNA extends Component {
         // itereate through all entries and display the name and description
         // sequence will be displayed in modalview file
         <ListGroup.Item className="list-group-item" key={entry.sequence} onClick={this.handleShow}>
-          <h5>{entry.name }</h5>
+          <h4>{entry.name }</h4>
           <p> Description: {entry.description} </p>
           <p> Sequence:</p>
           <ModalView name={entry.name} description={entry.description} sequence={entry.sequence}/>
@@ -105,7 +105,7 @@ class ViewDNA extends Component {
       if (this.state.filteredEntries.length < 1) {
         entriesJsx = this.state.sortedEntries.map(entry =>
           <ListGroup.Item className="list-group-item" key={entry.sequence} onClick={this.handleShow}>
-            <h5> {entry.name} </h5>
+            <h4> {entry.name} </h4>
             <p> Description: {entry.description} </p>
             <p> Sequence:</p>
             <ModalView name={entry.name} description={entry.description} sequence={entry.sequence}/>
@@ -115,7 +115,7 @@ class ViewDNA extends Component {
         // if they are filtered then itereate through the filtered entries
         entriesJsx = this.state.filteredEntries.map(entry => (
           <div key={this.sequence}>
-            <h5> {entry.name }</h5>
+            <h4> {entry.name }</h4>
             <p> Description: {entry.description} </p>
             <p> Sequence:</p>
             <ModalView name={entry.name} description={entry.description} sequence={entry.sequence}/>
@@ -126,7 +126,7 @@ class ViewDNA extends Component {
     } else if (!this.state.sorted) {
       entriesJsx = this.state.filteredEntries.map(entry => (
         <div key={this.sequence}>
-          <h5> {entry.name }</h5>
+          <h4> {entry.name }</h4>
           <p> Description: {entry.description} </p>
           <p> Sequence:</p>
           <ModalView name={entry.name} description={entry.description} sequence={entry.sequence}/>

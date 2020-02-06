@@ -147,7 +147,7 @@ class CreateDNA extends Component {
 
   render () {
     return (
-      <div>
+      <div className="form-box">
         <h3> Enter your DNA sequence </h3>
         <SequenceForm
           dna={this.state.dna}

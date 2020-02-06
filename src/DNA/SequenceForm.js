@@ -9,6 +9,7 @@ const SequenceForm = ({ dna, handleChange, handleSubmit, addToEntries }) => (
       value={dna.name}
       onChange={handleChange}
       name="name"
+      required
     />
     <input
       className="create-form"
@@ -17,6 +18,7 @@ const SequenceForm = ({ dna, handleChange, handleSubmit, addToEntries }) => (
       value={dna.description}
       onChange={handleChange}
       name="description"
+      required
     />
     <input
       className="create-form"
@@ -25,6 +27,7 @@ const SequenceForm = ({ dna, handleChange, handleSubmit, addToEntries }) => (
       value={dna.sequence}
       onChange={handleChange}
       name="sequence"
+      required
     />
     <br />
     <button type="submit" className="btn btn-primary submit-button" onClick={addToEntries}> Submit </button>

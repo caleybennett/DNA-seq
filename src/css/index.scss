@@ -22,10 +22,19 @@ h3 {
   margin: 30px;
 }
 
+.form-box {
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  align-content: center;
+}
+
 .create-form {
   width: 55%;
   padding: 10px;
   justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
   box-sizing: border-box;
   border: none;
   border-bottom: 1px solid black;
@@ -53,17 +62,17 @@ h3 {
 }
 
 .green {
-  color: green;
+  color: teal;
 }
 
 .purple {
-  color: purple;
+  color: mediumpurple;
 }
 
 .blue {
-  color: blue;
+  color: steelblue;
 }
 
 .red {
-  color: red;
+  color: maroon;
 }
