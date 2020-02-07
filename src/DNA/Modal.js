@@ -67,7 +67,6 @@ class ModalView extends Component {
         // the class names were then styled in the scss stylesheet
       }
       )
-      console.log(newArr)
       return newArr
     }
 

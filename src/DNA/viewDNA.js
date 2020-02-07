@@ -63,7 +63,7 @@ class ViewDNA extends Component {
     // match the name of the entry to the search value defined above
     const filteredEntries = this.state.entries.filter(entry => entry.name.toLowerCase().match(this.state.searchValue.toLowerCase()))
     // store the filteredEntries in state
-    this.setState({ filteredEntries: filteredEntries }, console.log(this.state.filteredEntries))
+    this.setState({ filteredEntries: filteredEntries })
   }
 
   // method to export JSON
@@ -139,7 +139,6 @@ class ViewDNA extends Component {
           <form className="search-bar" >
             <FaSearch />
             <input className="search" value={this.state.searchValue} onChange={this.handleSearch} type="text" placeholder="Search for Sequence"/>
-            {console.log(this.state.searchValue)}
           </form>
           <button className="btn btn-primary sort-btn" onClick={this.sortClick}> sort alphabetically </button>
         </div>
